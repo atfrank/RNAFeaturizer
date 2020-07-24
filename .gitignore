@@ -1,0 +1,8 @@
+*.o
+*.a
+*.so
+*DS_Store
+__pycache__/
+*.py[cod]
+bin/
+.cache
