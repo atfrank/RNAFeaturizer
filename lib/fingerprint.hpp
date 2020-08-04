@@ -26,9 +26,9 @@ using namespace std;
 namespace AFP{
   typedef map<string, vector<double> > AtomDev;
   typedef map<string, map<int, double > > AtomFP; // {key: neighboring atom type; value: {key: eta, value: fingerprint vector} }
-  bool getNeighDists(AtomDev& neighDists, Atom* atom, Molecule* mol, double cutoff, vector<string> neighTypes);
+  bool getNeighDists(AtomDev& neighDists, Coor coor, Molecule* mol, double cutoff, vector<string> neighTypes);
   bool printNeighDists(AtomDev neighDists, bool dict=true);
-  bool getFP(AtomFP& atomFP, Atom* atom, Molecule* mol,
+  bool getFP(AtomFP& atomFP, Coor coor, Molecule* mol,
              double cutoff, vector<int> etas, vector<string> neighTypes);
   bool printFP(AtomFP atomFP);
 }

@@ -51,16 +51,15 @@ public:
 
 namespace AFP{
 
-  bool getNeighDists(AtomDev& neighDists, Atom* atom, Molecule* mol, double cutoff, vector<string> neighTypes){
+  bool getNeighDists(AtomDev& neighDists, Coor coor, Molecule* mol, double cutoff, vector<string> neighTypes){
     double dist;
-    Coor coor;
     Coor coor_iter;
     string nType;
     Atom* aj;
 
     neighDists.clear();
 
-    coor = atom->getCoor();
+    // coor = atom->getCoor();
     // loop over neighbor atom types
     for (unsigned int k=0; k < neighTypes.size(); k ++){
       nType = neighTypes[k];
@@ -113,7 +112,7 @@ namespace AFP{
     return 0;
   }
 
-  bool getFP(AtomFP& atomFP, Atom* atom, Molecule* mol,
+  bool getFP(AtomFP& atomFP, Coor coor, Molecule* mol,
              double cutoff, vector<int> etas, vector<string> neighTypes){
     string nType;
     int eta;
@@ -122,7 +121,7 @@ namespace AFP{
 
     atomFP.clear();
     // get distances
-    getNeighDists(neighDists, atom, mol, cutoff, neighTypes);
+    getNeighDists(neighDists, coor, mol, cutoff, neighTypes);
     // convert distances into fingerprints
     for (AtomDev::iterator iter = neighDists.begin(); iter != neighDists.end(); ++iter){
       nType = iter->first;
@@ -166,8 +165,9 @@ namespace MFP{
     AFP::AtomDev atomDists;
     for (unsigned int i = 0; i < atoms.size(); i++){
       Atom* atom = atoms[i];
+      Coor coor = atoms[i]->getCoor();
     // for (vector<Atom*>::iterator atom = atoms.begin(); atom != atoms.end(); ++atom){
-      AFP::getNeighDists(atomDists, atom, mol, cutoff, neighTypes);
+      AFP::getNeighDists(atomDists, coor, mol, cutoff, neighTypes);
       neighDists[atom] = atomDists;
     }
     return 0;
@@ -190,8 +190,9 @@ namespace MFP{
     AFP::AtomFP atomFP;
     for (unsigned int i = 0; i < atoms.size(); i++){
       Atom* atom = atoms[i];
+      Coor coor = atoms[i]->getCoor();
     // for (vector<Atom*>::iterator atom = atoms.begin(); atom != atoms.end(); ++atom){
-      AFP::getFP(atomFP, atom, mol, cutoff, etas, neighTypes);
+      AFP::getFP(atomFP, coor, mol, cutoff, etas, neighTypes);
       molFP[atom] = atomFP;
     }
     return 0;
