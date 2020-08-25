@@ -49,6 +49,7 @@ namespace MFP{
 
 }
 
+// WORK IN PROGRESS
 // trajectory fingerprint (pose fingerprint, RNAPosers)
 namespace TFP{
   // typedef map<int, MFP::MolFP > TrajFP; // map frameid to MolFP
@@ -62,6 +63,7 @@ namespace TFP{
   bool getMedian(MFP::PoseMolFP& medianFP, PoseFP poseFP);
   bool normalizeFP(PoseFP& poseFP);
 }
+
 
 namespace FileProcess{
   Molecule* loadMol2(string mol2File);

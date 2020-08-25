@@ -49,9 +49,9 @@ class Coor {
     Coor operator/ (const double val) const;
     Coor& operator/= (const double val);
 
-    double& x(){return xcoor;};
-    double& y(){return ycoor;};
-    double& z(){return zcoor;};
+    const double& x() const {return xcoor;};
+    const double& y() const {return ycoor;};
+    const double& z() const {return zcoor;};
 
     Coor operator- () const;
     double dot (const Coor& vec) const; //Dot Product

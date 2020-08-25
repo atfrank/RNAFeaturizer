@@ -3,7 +3,7 @@ include ../makefile.defs
 
 OBJS = libmoletools.$(LIBEXT)
 
-all:	$(BINDIR) libmoletools.$(LIBEXT) test computeFP
+all:	$(BINDIR) libmoletools.$(LIBEXT) computeGrid computeFP computeCavityFP
 
 clean:
 	rm -rf *.o
@@ -17,10 +17,13 @@ $(BINDIR):
 libmoletools.$(LIBEXT):
 	$(MAKE) -C ../lib libmoletools.$(LIBEXT)
 
-test: test.o $(OBJS)
+computeGrid: computeGrid.o $(OBJS)
 	$(CXX) $(CXXFLAGS) $(OPTFLAGS) $(DEBUG) $(LIBFLAGS) $(INCFLAGS) -o $(BINDIR)/$@ $< $(LINKFLAGS)
 
 computeFP: computeFP.o $(OBJS)
+	$(CXX) $(CXXFLAGS) $(OPTFLAGS) $(DEBUG) $(LIBFLAGS) $(INCFLAGS) -o $(BINDIR)/$@ $< $(LINKFLAGS)
+
+computeCavityFP: computeCavityFP.o $(OBJS)
 	$(CXX) $(CXXFLAGS) $(OPTFLAGS) $(DEBUG) $(LIBFLAGS) $(INCFLAGS) -o $(BINDIR)/$@ $< $(LINKFLAGS)
 
 %.o:	%.cpp
